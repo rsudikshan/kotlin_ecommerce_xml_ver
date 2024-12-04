@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.sr.kt_ecommerce"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.sr.kt_ecommerce"

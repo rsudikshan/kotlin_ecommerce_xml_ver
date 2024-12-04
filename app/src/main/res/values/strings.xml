@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">KT_Ecommerce</string>
+    <string name="username_input_label">Username:</string>
+    <string name="password_input_label">Password:</string>
+    <string name="submit_input_label">Login</string>
+
 </resources>
