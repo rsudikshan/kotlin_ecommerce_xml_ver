@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">KT_Ecommerce</string>
     <string name="username_input_label">Username:</string>
+    <string name="email_input_label">Email:</string>
     <string name="password_input_label">Password:</string>
     <string name="submit_input_label">Login</string>
+    <string name="register_submit_input_label">Register</string>
+    <string name="register_anchor_first">Dont have an account? Register</string>
+    <string name="register_anchor_second">Here.</string>
+    <string name="register_with">Register with:</string>
 
 </resources>

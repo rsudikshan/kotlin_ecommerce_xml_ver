@@ -5,19 +5,33 @@ import android.util.Log
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import okhttp3.OkHttpClient
+
 
 class LoginRequest {
-    fun login(loginURL:String,context:Context, username:String, password:String){
+
+    interface LoginRequestListener{
+        fun onComplete();
+        fun onError();
+    }
+
+    fun login(
+        loginURL:String,context:Context
+        ,username:String
+        ,password:String
+        ,requestListener:LoginRequestListener){
 
         val reqObject = Volley.newRequestQueue(context);
+
 
         val stringRequest  = object:StringRequest(Request.Method.POST,loginURL,
             {
 
                 response->
+                requestListener.onComplete()
 
 
-                //Log.d( "LOGIN", response)
+                Log.d( "LOGIN", response)
 
             },
             {
@@ -30,7 +44,7 @@ class LoginRequest {
             }
             ){
 
-            override fun getParams(): MutableMap<String, String>? {
+            override fun getParams(): MutableMap<String, String>{
                 var map = mutableMapOf<String, String>()
                 map["username"] = username
                 map["password"] = password
