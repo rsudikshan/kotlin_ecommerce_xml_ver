@@ -57,7 +57,10 @@ class LoginFragment : Fragment(){
                         }
 
                         override fun onComplete() {
-                            progressBar.visibility = View.INVISIBLE
+                            requireActivity().runOnUiThread{
+                                progressBar.visibility = View.INVISIBLE
+                                Toast.makeText(requireContext(),"Logged IN",Toast.LENGTH_SHORT).show()
+                            }
 
                         }
                     }

@@ -3,6 +3,7 @@ package com.sr.kt_ecommerce.APIRequests
 import android.content.Context
 import android.util.Log
 import com.sr.kt_ecommerce.Companion.UrlCompanion
+import com.sr.kt_ecommerce.jwtmanager.JwtManagerCompanion
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaType
@@ -27,6 +28,9 @@ class LoginRequest {
         ,password:String
         ,requestListener:LoginRequestListener){
 
+
+
+
         val jsonBody = JSONObject().apply {
             put("username",username)
             put("password",password)
@@ -48,8 +52,22 @@ class LoginRequest {
 
             override fun onResponse(call: Call, response: Response) {
 
-                var jwtToken = response.body?.string()
-                Log.d(UrlCompanion.LOGIN_TAG,"$jwtToken")
+                val responseObject = response.body?.string()
+                val responseBody = responseObject?.let { JSONObject(it) }
+                val status = responseBody?.getString("status")
+
+                if(status.equals("successful")){
+                    val jwtToken = responseBody?.get("bearer ")
+                    JwtManagerCompanion.manager.setJwt(jwtToken.toString())
+                    Log.d(UrlCompanion.LOGIN_TAG,"$jwtToken")
+                    requestListener.onComplete()
+                }
+                else{
+                    requestListener.onError()
+                }
+
+
+
 
 
             }

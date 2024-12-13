@@ -6,12 +6,16 @@ import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.sr.kt_ecommerce.Fragments.LoginFragment
+import com.sr.kt_ecommerce.jwtmanager.JwtManagerCompanion
 
 class MainActivity:AppCompatActivity(){
 
      override fun onCreate(b: Bundle?){
         super.onCreate(b);
-        setContentView(R.layout.main_screen);
+
+        setContentView(R.layout.main_screen)
+        JwtManagerCompanion.manager.getKey(this)
+        JwtManagerCompanion.manager.clear()
 
          handleFragments()
 
