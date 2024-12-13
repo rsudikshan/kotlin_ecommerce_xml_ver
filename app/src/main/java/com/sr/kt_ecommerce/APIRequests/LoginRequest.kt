@@ -2,10 +2,16 @@ package com.sr.kt_ecommerce.APIRequests
 
 import android.content.Context
 import android.util.Log
-import com.android.volley.Request
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
+import com.sr.kt_ecommerce.Companion.UrlCompanion
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
+import org.json.JSONObject
+import java.io.IOException
 
 
 class LoginRequest {
@@ -21,43 +27,35 @@ class LoginRequest {
         ,password:String
         ,requestListener:LoginRequestListener){
 
-        val reqObject = Volley.newRequestQueue(context);
-
-
-        val stringRequest  = object:StringRequest(Request.Method.POST,loginURL,
-            {
-
-                response->
-                requestListener.onComplete()
-
-
-                Log.d( "LOGIN", response)
-
-            },
-            {
-
-                error->
-                Log.d("LOGIN",username)
-                Log.d("LOGIN", password)
-                Log.d("LOGIN", error.toString())
-
-            }
-            ){
-
-            override fun getParams(): MutableMap<String, String>{
-                var map = mutableMapOf<String, String>()
-                map["username"] = username
-                map["password"] = password
-
-
-                return map
-            }
+        val jsonBody = JSONObject().apply {
+            put("username",username)
+            put("password",password)
         }
 
+        val client = OkHttpClient()
+        val mediaType = "application/json; charset=utf-8".toMediaType()
+
+        val requestBody = jsonBody.toString().toRequestBody(mediaType)
+        val request = Request.Builder()
+            .url(loginURL)
+            .post(requestBody)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+
+                var jwtToken = response.body?.string()
+                Log.d(UrlCompanion.LOGIN_TAG,"$jwtToken")
 
 
+            }
+        })
 
-        reqObject.add(stringRequest)
+
 
     }
 }

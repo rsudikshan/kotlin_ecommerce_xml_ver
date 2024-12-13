@@ -46,7 +46,7 @@ class LoginFragment : Fragment(){
 
             if(username.isNotEmpty() && password.isNotEmpty()){
                 progressBar.visibility = View.VISIBLE
-                loginRequest.login(UrlCompanion.MAIN_URL,
+                loginRequest.login(UrlCompanion.LOGIN_URL,
                     requireContext(),
                     username,
                     password,
