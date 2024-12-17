@@ -1,8 +1,8 @@
-package com.sr.kt_ecommerce.APIRequests
+package com.sr.kt_ecommerce.api
 
 import android.content.Context
 import android.util.Log
-import com.sr.kt_ecommerce.Companion.UrlCompanion
+import com.sr.kt_ecommerce.companion.UrlCompanion
 import com.sr.kt_ecommerce.jwtmanager.JwtManagerCompanion
 import okhttp3.Call
 import okhttp3.Callback

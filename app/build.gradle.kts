@@ -45,6 +45,8 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation ("com.squareup.okhttp3:okhttp:4.11.0")
     implementation ("androidx.security:security-crypto:1.1.0-alpha03")
+    implementation ("com.squareup.picasso:picasso:2.8")
+
 
 
 }

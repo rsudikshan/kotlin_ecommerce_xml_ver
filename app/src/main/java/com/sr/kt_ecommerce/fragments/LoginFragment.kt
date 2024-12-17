@@ -1,4 +1,4 @@
-package com.sr.kt_ecommerce.Fragments
+package com.sr.kt_ecommerce.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,8 +10,8 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.sr.kt_ecommerce.APIRequests.LoginRequest
-import com.sr.kt_ecommerce.Companion.UrlCompanion
+import com.sr.kt_ecommerce.api.LoginRequest
+import com.sr.kt_ecommerce.companion.UrlCompanion
 import com.sr.kt_ecommerce.R
 
 

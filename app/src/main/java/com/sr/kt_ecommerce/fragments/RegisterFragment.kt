@@ -1,4 +1,4 @@
-package com.sr.kt_ecommerce.Fragments
+package com.sr.kt_ecommerce.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,10 +8,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
-import com.sr.kt_ecommerce.APIRequests.RegisterRequest
+import com.sr.kt_ecommerce.api.RegisterRequest
 import com.sr.kt_ecommerce.R
 import org.json.JSONObject
-import java.util.zip.Inflater
 
 class RegisterFragment:Fragment() {
 
