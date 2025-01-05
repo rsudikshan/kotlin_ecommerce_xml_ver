@@ -2,7 +2,6 @@ package com.sr.kt_ecommerce.api
 
 import android.content.Context
 import android.util.Log
-
 import com.sr.kt_ecommerce.companion.UrlCompanion
 import okhttp3.Call
 import okhttp3.Callback
@@ -15,38 +14,46 @@ import org.json.JSONObject
 import java.io.IOException
 
 class RegisterRequest {
-
-
-    interface RegisterRequestListener{
-        fun onComplete()
-        fun onError()
+    interface RegisterRequestCompletionListener{
+        fun onComplete();
+        fun onError();
+        fun onServerError();
     }
 
-    fun register(context:Context,jsonBody: JSONObject){
-        val client = OkHttpClient()
+    fun register(
+        context:Context,
+        url:String,
+        jsonBody:JSONObject,
+        completionListener: RegisterRequestCompletionListener
+    ){
+
+        Log.d(UrlCompanion.REGISTER_TAG,"Hitting here")
         val mediaType = "application/json; charset=utf-8".toMediaType()
-
-
-        val requestBody = jsonBody.toString().toRequestBody(mediaType)
-
-        val request = Request.Builder()
-            .url(UrlCompanion.REGISTER_URL)
-            .post(requestBody)
+        val client = OkHttpClient();
+        val request =  Request.Builder()
+            .url(url)
+            .post(jsonBody.toString().toRequestBody(mediaType))
             .build()
+        client.newCall(request).enqueue(
+            object: Callback{
+                override fun onFailure(call: Call, e: IOException) {
+                    Log.d(UrlCompanion.REGISTER_TAG,e.toString())
+                    Log.d(UrlCompanion.REGISTER_TAG, UrlCompanion.REGISTER_URL)
+                }
 
-        client.newCall(request).enqueue(object:Callback{
-            override fun onFailure(call: Call, e: IOException) {
-                Log.d(UrlCompanion.REGISTER_TAG, "unsuccessful :$e")
+                override fun onResponse(call: Call, response: Response) {
+                    Log.d(UrlCompanion.REGISTER_TAG,response.body.toString())
+                    val responseBody = response.body?.string()
 
+                    val responseObject = responseBody?.let { JSONObject(it) }
+                    if(responseObject?.getString("status").equals("successful")){
+                        completionListener.onComplete()
+                    }
+                    else if (responseObject?.getString("status").equals("email already exists")){
+                        completionListener.onServerError()
+                    }
+                }
             }
-
-            override fun onResponse(call: Call, response: Response) {
-                Log.d(UrlCompanion.REGISTER_TAG,"success  :"+response.body.toString())
-
-            }
-        }
         )
-
-
     }
 }

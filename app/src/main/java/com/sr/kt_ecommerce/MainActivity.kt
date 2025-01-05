@@ -4,6 +4,7 @@ import android.media.Image
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.sr.kt_ecommerce.companion.ProductCompanion
 import com.sr.kt_ecommerce.fragments.ExploreFragment
 import com.sr.kt_ecommerce.fragments.LoginFragment
 import com.sr.kt_ecommerce.jwtmanager.JwtManagerCompanion
@@ -37,6 +38,8 @@ class MainActivity:AppCompatActivity(){
         }
 
         exploreImageView.setOnClickListener{
+            ProductCompanion.productNameCompanion.clear()
+
             val fragment = ExploreFragment();
             val fragmentManager = supportFragmentManager;
             val transaction = fragmentManager.beginTransaction();

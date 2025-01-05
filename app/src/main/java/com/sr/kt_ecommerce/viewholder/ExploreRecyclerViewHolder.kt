@@ -18,8 +18,6 @@ class ExploreRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVi
         productImage = itemView.findViewById(R.id.explore_product_image)
         productName = itemView.findViewById(R.id.explore_product_name)
         order = itemView.findViewById(R.id.explore_order_button)
-
-
     }
 
 }

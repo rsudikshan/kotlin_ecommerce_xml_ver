@@ -57,7 +57,7 @@ class LoginRequest {
                 val status = responseBody?.getString("status")
 
                 if(status.equals("successful")){
-                    val jwtToken = responseBody?.get("bearer ")
+                    val jwtToken = responseBody?.get("BEARER ")
                     JwtManagerCompanion.manager.setJwt(jwtToken.toString())
                     Log.d(UrlCompanion.LOGIN_TAG,"$jwtToken")
                     requestListener.onComplete()

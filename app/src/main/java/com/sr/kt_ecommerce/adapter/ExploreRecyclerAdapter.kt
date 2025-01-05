@@ -1,10 +1,13 @@
 package com.sr.kt_ecommerce.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.sr.kt_ecommerce.R
+import com.sr.kt_ecommerce.companion.UrlCompanion
 import com.sr.kt_ecommerce.viewholder.ExploreRecyclerViewHolder
 
 class ExploreRecyclerAdapter(
@@ -29,7 +32,8 @@ class ExploreRecyclerAdapter(
 
     override fun onBindViewHolder(holder: ExploreRecyclerViewHolder, position: Int) {
         holder.productName.text = productName[position]
-        //Picasso.get().load(productImageUrl[position]).into(holder.productImage)
+        Log.d(UrlCompanion.PRODUCT_TAG,productImageUrl[position])
+        Picasso.get().load(UrlCompanion.MAIN_URL+productImageUrl[position]).into(holder.productImage)
 
     }
 }

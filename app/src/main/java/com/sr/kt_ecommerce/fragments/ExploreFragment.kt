@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sr.kt_ecommerce.R
 import com.sr.kt_ecommerce.adapter.ExploreRecyclerAdapter
@@ -28,7 +29,7 @@ class ExploreFragment : Fragment(){
     }
 
     private fun fragmentHandler() {
-        recycler.layoutManager = GridLayoutManager(requireContext(),3)
+        recycler.layoutManager = LinearLayoutManager(requireContext())
         ProductRequest().getProducts(object : ProductRequest.ProductRequestListener {
             override fun onComplete() {
                 // Check if adapter is already set
@@ -44,7 +45,7 @@ class ExploreFragment : Fragment(){
 
 
                     } else {
-                        // If the adapter is already set, just notify data change
+                        //the adapter is already set, just notify data change
                         (recycler.adapter as ExploreRecyclerAdapter).notifyDataSetChanged()
                     }
                 }

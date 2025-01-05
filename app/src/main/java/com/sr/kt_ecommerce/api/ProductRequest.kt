@@ -1,5 +1,6 @@
 package com.sr.kt_ecommerce.api
 
+import android.util.Log
 import com.sr.kt_ecommerce.companion.ProductCompanion
 import com.sr.kt_ecommerce.companion.UrlCompanion
 import okhttp3.Call
@@ -44,11 +45,17 @@ class ProductRequest {
                         try {
                             val responseJsonArray = JSONArray(responseBody)
                             val length = responseJsonArray.length()
+                            Log.d(UrlCompanion.PRODUCT_TAG,responseJsonArray.toString())
 
                             for (i in 0 until length) {
                                 val responseResult = responseJsonArray.getJSONObject(i)
+
                                 ProductCompanion.productNameCompanion.add(responseResult.getString("productName"))
-                                ProductCompanion.imageUrlCompanion.add(responseResult.getString("imageName"))
+                                ProductCompanion.imageUrlCompanion.add("/uploads/"+responseResult.getString("productImageName"))
+                                ProductCompanion.productPriceCompanion.add(responseResult.getString("productPrice"))
+
+
+
 
                             }
                             requestListener.onComplete()
@@ -62,6 +69,6 @@ class ProductRequest {
                 }
 
             }
-                    )
+        )
     }
 }
